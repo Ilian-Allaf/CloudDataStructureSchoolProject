@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from plots import plot_transaction_distribution, plot_temporal_evolution, plot_geographical_distribution, get_transactions_by_commune
+from plots import plot_transaction_distribution, plot_temporal_evolution, plot_geographical_distribution, get_transactions_by_commune, plot_mean_squared_meter
 
 app = Flask(__name__)
 
@@ -23,4 +23,10 @@ def func_transaction_distribution():
 def func_temporal_evolution():
     input_image = plot_temporal_evolution()
     title = "Évolution temporelle des transactions"
+    return render_template('home.html', title=title, image=input_image)
+
+@app.route("/mean_squared_meter")
+def func_mean_squared_meter():
+    input_image = plot_mean_squared_meter()
+    title = "Prix moyen du m2 par type de transaction"
     return render_template('home.html', title=title, image=input_image)

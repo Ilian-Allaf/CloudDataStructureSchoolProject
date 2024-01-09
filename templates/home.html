@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visualisations</title>
     <style>
-        body {
-            display: flex;
-        }
+      body {
+        display: flex;
+      }
 
-        nav {
-            width: 200px;
-            background-color: #f1f1f1;
-            padding: 10px;
-        }
+      nav {
+        width: 200px;
+        background-color: #f1f1f1;
+        padding: 10px;
+      }
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-        nav li {
-            margin-bottom: 10px;
-        }
+      nav li {
+        margin-bottom: 10px;
+      }
 
-        main {
-            flex: 1;
-            padding: 20px;
-        }
+      main {
+        flex: 1;
+        padding: 20px;
+      }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <nav>
-        <ul>
-            <li><a href="{{ url_for('func_transaction_distribution') }}">Répartition des types de transactions</a></li>
-            <li><a href="{{ url_for('func_temporal_evolution') }}">Évolution temporelle des transactions</a></li>
-            <li><a href="{{ url_for('func_geographical_distribution') }}">Distribution géographique des ventes</a></li>
-        </ul>
+      <ul>
+        <li>
+          <a href="{{ url_for('func_transaction_distribution') }}"
+            >Répartition des types de transactions</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('func_temporal_evolution') }}"
+            >Évolution temporelle des transactions</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('func_geographical_distribution') }}"
+            >Distribution géographique des ventes</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('func_mean_squared_meter') }}"
+            >Prix moyen du m2 par type de transaction</a
+          >
+        </li>
+      </ul>
     </nav>
 
     <main>
-        {% if title and image %}
-            <h1>{{ title }}</h1>
-            <img src="data:image/png;base64,{{ image }}" alt="Graphique">
-        {% endif %}
+      {% if title and image %}
+      <h1>{{ title }}</h1>
+      <img src="data:image/png;base64,{{ image }}" alt="Graphique" />
+      {% endif %}
     </main>
-
-</body>
+  </body>
 </html>
