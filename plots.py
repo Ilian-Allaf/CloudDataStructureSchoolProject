@@ -2,14 +2,15 @@ from mongoclient import client, collection_name, database_name
 import matplotlib
 import matplotlib.pyplot as plt
 import base64
+import pandas as pd
 from io import BytesIO
+import seaborn as sns
 matplotlib.use('Agg')
 
 db = client[database_name]
 collection = db[collection_name]
 
 def plot_transaction_distribution():
-    
 
      # Effectuer une agrégation pour compter le nombre de transactions par type
     pipeline = [
@@ -31,7 +32,6 @@ def plot_transaction_distribution():
     plt.tight_layout()
 
     
-
     # Convertir le graphique en base64
     image_stream = BytesIO()
     plt.savefig(image_stream, format='png')
@@ -146,5 +146,52 @@ def plot_temporal_evolution():
 
     # Fermer la connexion à MongoDB
     # client.close()
+
+    return image_base64
+
+def plot_mean_squared_meter():
+    '''data = collection.find({
+    'Type local': {'$in': ['Maison', 'Appartement']},
+    'Surface reelle bati': {'$type': 1},  # Check if 'Surface reelle bati' is numeric
+    'Valeur fonciere': {'$type': 1},  # Check if 'Valeur fonciere' is numeric
+    })'''
+    data = collection.find({}, {
+    'Type local': 1,
+    'Surface reelle bati': 1,
+    'Valeur fonciere': 1
+})
+
+    df = pd.DataFrame(data)
+
+    df['Surface reelle bati'] = pd.to_numeric(df['Surface reelle bati'], errors='coerce')
+    df['Valeur fonciere'] = pd.to_numeric(df['Valeur fonciere'], errors='coerce')
+
+    # Drop rows with missing values
+    df = df.dropna(subset=['Surface reelle bati', 'Valeur fonciere'])
+
+    # Filter data for 'Maison' and 'Appartement'
+    df = df[df['Type local'].isin(['Maison', 'Appartement'])]
+
+    # Calculate price per square meter
+    df['Price per m2'] = df['Valeur fonciere'] / df['Surface reelle bati']
+
+    # Set seaborn style
+    sns.set(style="whitegrid")
+
+    # Create a bar plot
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x='Type local', y='Price per m2', data=df, estimator='mean', errorbar=None)
+    plt.title('Prix moyen au m² entre un appartement et une maison')
+    plt.xlabel('Type de transaction')
+    plt.ylabel('Average Price per Square Meter')
+    plt.tight_layout()
+
+    # Convertir le graphique en base64
+    image_stream = BytesIO()
+    plt.savefig(image_stream, format='png')
+    image_stream.seek(0)
+
+    # Convertir l'objet BytesIO en une chaîne base64 pour l'inclure dans l'HTML
+    image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
 
     return image_base64
