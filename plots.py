@@ -40,7 +40,7 @@ def plot_transaction_distribution():
     image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
 
     # Fermer la connexion à MongoDB
-    client.close()
+    # client.close()
 
     return image_base64
 
@@ -73,7 +73,7 @@ def get_transactions_by_commune(commune_name):
     graphic = graphic.decode('utf-8')
 
     # Fermer la connexion à MongoDB
-    client.close()
+    # client.close()
 
     return graphic
 
@@ -134,6 +134,6 @@ def plot_temporal_evolution():
     image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
 
     # Fermer la connexion à MongoDB
-    client.close()
+    # client.close()
 
     return image_base64

@@ -1,2 +1,24 @@
 <!DOCTYPE html>
-<p>Hello, World!!!</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisations</title>
+</head>
+<body>
+
+    <!-- <nav>
+        <ul>
+            <li><a href="{{ url_for('transaction_distribution') }}">Répartition des types de transactions</a></li>
+            <li><a href="{{ url_for('temporal_evolution') }}">Évolution temporelle des transactions</a></li>
+            <li><a href="{{ url_for('geographical_distribution') }}">Distribution géographique des ventes</a></li>
+        </ul>
+    </nav> -->
+
+    {% if image %}
+        <h1>{{ title }}</h1>
+        <img src="data:image/png;base64,{{ image }}" alt="Graphique">
+    {% endif %}
+
+</body>
+</html>
