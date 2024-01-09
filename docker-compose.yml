@@ -1,9 +1,17 @@
 services:
+  web:
+    build: .
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+
   database:
     image: mongo
     container_name: mongodb
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongovolume:/data/db
 
