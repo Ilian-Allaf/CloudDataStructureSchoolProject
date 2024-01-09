@@ -1,8 +1,9 @@
 from mongoclient import client, collection_name, database_name
+import matplotlib
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
-
+matplotlib.use('Agg')
 
 db = client[database_name]
 collection = db[collection_name]
@@ -30,11 +31,13 @@ def plot_transaction_distribution():
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
 
+    
+
     # Convertir le graphique en base64
     image_stream = BytesIO()
     plt.savefig(image_stream, format='png')
     image_stream.seek(0)
-    plt.close()
+    
 
     # Convertir l'objet BytesIO en une chaîne base64 pour l'inclure dans l'HTML
     image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')
@@ -67,6 +70,8 @@ def get_transactions_by_commune(commune_name):
     plt.savefig(buffer, format='png')
     buffer.seek(0)
 
+    
+
     # Convert the BytesIO object to a base64-encoded string
     image_png = buffer.getvalue()
     graphic = base64.b64encode(image_png)
@@ -78,10 +83,12 @@ def get_transactions_by_commune(commune_name):
     return graphic
 
 def plot_geographical_distribution():
-
+    plt.clf()
     # Perform an aggregation to count the number of transactions per commune
     pipeline = [
         {"$group": {"_id": "$Commune", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}},
+        {"$limit": 10},
         {"$project": {"_id": 0, "Commune": "$_id", "Nombre de transactions": "$count"}}
     ]
 
@@ -90,12 +97,18 @@ def plot_geographical_distribution():
     # Create a bar plot of the transaction counts
     communes = [doc['Commune'] for doc in result]
     transaction_counts = [doc['Nombre de transactions'] for doc in result]
-    plt.bar(communes, transaction_counts)
 
+    plt.bar(range(len(communes)), transaction_counts)
+    plt.xticks(range(len(communes)), communes, rotation='vertical')
+    
     # Save the plot to a BytesIO object
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
+
+    # Clear the Matplotlib figure and close it
+    plt.clf()
+    plt.close()
 
     # Convert the BytesIO object to a base64-encoded string
     image_png = buffer.getvalue()
@@ -124,11 +137,11 @@ def plot_temporal_evolution():
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
 
+    
     # Convertir le graphique en base64
     image_stream = BytesIO()
     plt.savefig(image_stream, format='png')
     image_stream.seek(0)
-    plt.close()
 
     # Convertir l'objet BytesIO en une chaîne base64 pour l'inclure dans l'HTML
     image_base64 = base64.b64encode(image_stream.read()).decode('utf-8')

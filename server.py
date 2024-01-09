@@ -10,14 +10,17 @@ def hello_world(name=None):
 @app.route("/geographical_distribution")
 def func_geographical_distribution():
     input_image = plot_geographical_distribution()
-    return render_template('home.html', image = input_image)
+    title = "Distribution géographique des ventes"
+    return render_template('home.html', title=title, image=input_image)
 
 @app.route("/transaction_distribution")
 def func_transaction_distribution():
     input_image = plot_transaction_distribution()
-    return render_template('home.html', image = input_image)
+    title = "Répartition des types de transactions"
+    return render_template('home.html', title=title, image=input_image)
 
 @app.route("/temporal_evolution")
-def func_plot_temporal_evolution():
+def func_temporal_evolution():
     input_image = plot_temporal_evolution()
-    return render_template('home.html', image = input_image)
+    title = "Évolution temporelle des transactions"
+    return render_template('home.html', title=title, image=input_image)

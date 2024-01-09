@@ -4,21 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualisations</title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        nav {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            margin-bottom: 10px;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- <nav>
+    <nav>
         <ul>
-            <li><a href="{{ url_for('transaction_distribution') }}">Répartition des types de transactions</a></li>
-            <li><a href="{{ url_for('temporal_evolution') }}">Évolution temporelle des transactions</a></li>
-            <li><a href="{{ url_for('geographical_distribution') }}">Distribution géographique des ventes</a></li>
+            <li><a href="{{ url_for('func_transaction_distribution') }}">Répartition des types de transactions</a></li>
+            <li><a href="{{ url_for('func_temporal_evolution') }}">Évolution temporelle des transactions</a></li>
+            <li><a href="{{ url_for('func_geographical_distribution') }}">Distribution géographique des ventes</a></li>
         </ul>
-    </nav> -->
+    </nav>
 
-    {% if image %}
-        <h1>{{ title }}</h1>
-        <img src="data:image/png;base64,{{ image }}" alt="Graphique">
-    {% endif %}
+    <main>
+        {% if title and image %}
+            <h1>{{ title }}</h1>
+            <img src="data:image/png;base64,{{ image }}" alt="Graphique">
+        {% endif %}
+    </main>
 
 </body>
 </html>
