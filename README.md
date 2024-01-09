@@ -14,11 +14,11 @@ Move it in the root project directory
 # Insert data in MongoDB
 
 ```bash
-pyton insertdata.py
+python insertdata.py
 ```
 
 # Run queries
 
 ```bash
-pyton queries.py
+python queries.py
 ```
