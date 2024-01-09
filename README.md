@@ -1,7 +1,7 @@
-# Download Data with this link 
+# Download Data by copying this link in your browser
 
 ```
-https://static.data.gouv.fr 
+https://static.data.gouv.fr/resources/demandes-de-valeurs-foncieres/20231010-093302/valeursfoncieres-2023.txt
 ```
 
 Move it in the root project directory
