@@ -1,3 +1,8 @@
+# Run MongoDB container
+```bash
+docker compose up -d
+```
+
 # Download Data by copying this link in your browser
 
 ```
