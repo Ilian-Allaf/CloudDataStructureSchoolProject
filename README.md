@@ -1,5 +1,7 @@
 # Rapport de Projet - Visualisation de Données Immobilières
 
+Membres : Tanguy Lichau, Ilian Allaf, Quentin Guillard, Roman Gaignault
+
 ## Procedure de deploiement
 
 Pour faire tourner l'application il suffit simplement d'avoir docker
