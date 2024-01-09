@@ -25,7 +25,6 @@ def plot_transaction_distribution():
 
     plt.figure(figsize=(10, 6))
     plt.bar(types_transaction, nombre_transactions, color='skyblue')
-    plt.title('Répartition des types de transactions')
     plt.xlabel('Type de transaction')
     plt.ylabel('Nombre de transactions')
     plt.xticks(rotation=45, ha='right')
@@ -131,7 +130,6 @@ def plot_temporal_evolution():
 
     plt.figure(figsize=(12, 6))
     plt.plot(dates, transaction_counts, marker='o', linestyle='-')
-    plt.title('Évolution temporelle des transactions')
     plt.xlabel('Date de mutation')
     plt.ylabel('Nombre de transactions')
     plt.xticks(rotation=45, ha='right')
