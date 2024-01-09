@@ -99,7 +99,8 @@ def plot_geographical_distribution():
 
     plt.bar(range(len(communes)), transaction_counts)
     plt.xticks(range(len(communes)), communes, rotation='vertical')
-    
+    plt.ylabel('Nombre de ventes')
+
     # Save the plot to a BytesIO object
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
