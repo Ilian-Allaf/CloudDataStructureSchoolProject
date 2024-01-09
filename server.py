@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from plots import plot_transaction_distribution, plot_temporal_evolution, plot_geographical_distribution, get_transactions_by_commune, plot_mean_squared_meter
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world(name=None):
-    return render_template('test.html')
+def hello_world():
+    return redirect(url_for('func_geographical_distribution'))
 
 @app.route("/geographical_distribution")
 def func_geographical_distribution():
