@@ -1,4 +1,4 @@
-from mongoclient import client, collection_name, database_name
+from db_config import client, database_name, collection_name
 import matplotlib
 import matplotlib.pyplot as plt
 import base64
